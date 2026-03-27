@@ -18,3 +18,10 @@ class CatalogoLivraria:
             livro for livro in self.acervo 
             if termo in livro.titulo.lower()
         ]
+    def buscar_por_autor(self, autor_buscado):
+        # Refatorado: Busca flexível ignorando maiúsculas/minúsculas
+        termo = autor_buscado.lower()
+        return [
+            livro for livro in self.acervo 
+            if termo in livro.autor.lower()
+        ]
