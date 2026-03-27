@@ -31,3 +31,17 @@ class TestComportamentoBuscaCatalogo(unittest.TestCase):
         # ENTÃO o sistema deve retornar os livros desse autor
         self.assertEqual(len(resultados), 1)
         self.assertEqual(resultados[0].autor, "J.R.R. Tolkien")
+
+    def test_quando_ordena_por_preco_entao_retorna_do_mais_barato_pro_mais_caro(self):
+        # DADO que temos livros com preços diferentes no catálogo
+        livro_caro = Livro("Livro Caro", "Autor A", 2020, "TI", 150.0)
+        livro_barato = Livro("Livro Barato", "Autor B", 2021, "TI", 40.0)
+        self.catalogo.adicionar_livro(livro_caro)
+        self.catalogo.adicionar_livro(livro_barato)
+        
+        # QUANDO o usuário pede para ordenar por preço
+        resultados = self.catalogo.ordenar_por_preco()
+        
+        # ENTÃO o primeiro da lista deve ser o mais barato
+        self.assertEqual(resultados[0].titulo, "Livro Barato")
+        self.assertEqual(resultados[-1].titulo, "Livro Caro")
