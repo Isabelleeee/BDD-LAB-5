@@ -1,9 +1,12 @@
 class Livro:
-    def __init__(self, titulo, autor, ano):
+    # Atualizado com o preço
+    def __init__(self, titulo, autor, ano, categoria="", preco=0.0):
         self.titulo = titulo
         self.autor = autor
         self.ano = ano
-
+        self.categoria = categoria
+        self.preco = preco
+        
 class CatalogoLivraria:
     def __init__(self):
         self.acervo = []
@@ -25,3 +28,6 @@ class CatalogoLivraria:
             livro for livro in self.acervo 
             if termo in livro.autor.lower()
         ]
+    def ordenar_por_preco(self):
+        # Refatorado: usa a função nativa do Python para ordenar a lista baseada no atributo preco
+        return sorted(self.acervo, key=lambda livro: livro.preco)
