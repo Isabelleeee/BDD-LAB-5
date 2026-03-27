@@ -12,9 +12,16 @@ class CatalogoLivraria:
         self.acervo.append(livro)
 
     def buscar_por_titulo(self, titulo_buscado):
-        # Código mínimo para passar no teste
-        resultados = []
-        for livro in self.acervo:
-            if livro.titulo == titulo_buscado:
-                resultados.append(livro)
-        return resultados
+        # Refatoração: Busca ignorando maiúsculas/minúsculas e aceitando partes do título
+        termo = titulo_buscado.lower()
+        return [
+            livro for livro in self.acervo 
+            if termo in livro.titulo.lower()
+        ]
+    def buscar_por_autor(self, autor_buscado):
+        # Refatorado: Busca flexível ignorando maiúsculas/minúsculas
+        termo = autor_buscado.lower()
+        return [
+            livro for livro in self.acervo 
+            if termo in livro.autor.lower()
+        ]

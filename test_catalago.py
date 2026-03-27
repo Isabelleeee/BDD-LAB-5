@@ -22,3 +22,12 @@ class TestComportamentoBuscaCatalogo(unittest.TestCase):
         
         # ENTÃO o sistema deve retornar uma lista vazia
         self.assertEqual(len(resultados), 0)
+
+    def test_quando_busca_por_autor_existente_entao_retorna_livros_dele(self):
+        # DADO que o catálogo possui Tolkien e Orwell (já configurado no setUp)
+        # QUANDO o usuário busca pelo autor "Tolkien"
+        resultados = self.catalogo.buscar_por_autor("Tolkien")
+        
+        # ENTÃO o sistema deve retornar os livros desse autor
+        self.assertEqual(len(resultados), 1)
+        self.assertEqual(resultados[0].autor, "J.R.R. Tolkien")
